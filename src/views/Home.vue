@@ -1,8 +1,11 @@
 <template>
-  <div class="home">
+  <!-- <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  </div> -->
+   <section>
+     <img src="../assets/mascot-1.png" alt="" id="mascot">
+    </section>
 </template>
 
 <script>
@@ -16,3 +19,10 @@ export default {
   }
 }
 </script>
+
+ 
+
+ 
+<style>
+#mascot {display: block;margin: 0 auto;}
+</style>
