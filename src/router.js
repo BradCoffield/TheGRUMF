@@ -16,10 +16,23 @@ export default new Router({
     {
       path: '/add-submission',
       name: 'add-submission',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/AddSubmission.vue')
-    }
+      component: () => import(/* webpackChunkName: "addSub" */ './views/AddSubmission.vue')
+    },
+    {
+      path: '/view-submissions',
+      name: 'view-submissions',
+      component: () => import(/* webpackChunkName: "viewSub" */ './views/ViewSubmissions.vue')
+    },
+    {
+      path: '/edit-submission/:id',
+      name: 'editSubmission',
+      component: () => import(/* webpackChunkName: "editSub" */ './views/EditSubmission.vue')
+    },
+    {
+      path: '/rate-submission/:id',
+      name: 'rateSubmission',
+      component: () => import(/* webpackChunkName: "rateSub" */ './views/RateSubmission.vue')
+    },
+  
   ]
 })

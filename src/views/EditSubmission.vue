@@ -1,7 +1,7 @@
 <template>
   
   <div id="addSubmission">
-    <h1>Add details here regarding a potentially bullocks submisison.</h1> <hr>
+    <h1>Add details here regarding a potentially bullocks submisison.</h1>
 
     <section id="addSubmissionForm">
       <div class="columns">
@@ -20,7 +20,7 @@
               <input
                 class="input"
                 type="email"
-                placeholder=""
+                placeholder="Text input"
                 v-model="submission.email"
               >
             </div>
@@ -70,62 +70,72 @@
         </div>
       </div>
     </section>
-    <button class="button is-primary sendButton" @click="sendSub"><span class="mdi mdi-check"></span>&nbsp; Submit</button>
-  <button class="button is-light sendButton " @click="goActuallyHome"><span class="mdi mdi-cancel"></span>&nbsp; Cancel</button>
+     <button class="button is-primary sendButton" @click="sendUpdate"> <span class="mdi mdi-check"></span>&nbsp; Submit</button>
+  <button class="button is-danger " @click="goHome"> <span class="mdi mdi-cancel"></span>&nbsp; Cancel</button>
+ 
   </div>
-  
-  <!-- <div id="show-inputs">
-    {{submission.author}}
-    {{submission.email}}
-    {{submission.file}}
-    {{submission.issue}}
-    {{submission.notes}}
-  </div> -->
+ 
 
 </template>
 
 <script>
 import firebase from "../Firebase";
 import router from "../router";
+
 export default {
-  name: "addSubmission",
+  name: "editDatabase",
   data() {
     return {
-      submission: {
-        author: "",
-        email: "",
-        file: "",
-        issue: "",
-        notes: "",
-        title: ""
-      }
+      key: this.$route.params.id,
+      submission: {},
+       
     };
   },
+  created() {
+    const ref = firebase
+      .firestore()
+      .collection("issue_Two") 
+      .doc(this.$route.params.id);
+
+    
+
+    let theSubmission = ref.get().then(doc => {
+      if (doc.exists) {
+     
+        this.submission = doc.data();
+        console.log(this.submission);
+        console.log(this.$route.params.id);
+      } else {
+        alert("No such document!");
+      }
+    });
+
+    
+
+  },
+
   methods: {
-    sendSub(evt) {
+    sendUpdate(evt) {
+ 
       evt.preventDefault();
       const updateRef = firebase
         .firestore()
-        .collection(`issue_${this.submission.issue}`)
-        .add(this.submission)
-        .then(function() {
-          console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-          console.error("Error writing document: ", error);
-        });
+       .collection(`issue_${this.submission.issue}`)
+        .doc(this.$route.params.id)
+        .set(this.submission, { merge: true });
       // updateRef();
     },
-     goActuallyHome() {
+    goActuallyHome() {
       router.push("/");
     },
-  }
+   
+    
+  },
+  
 };
 </script>
- 
- <style>
- .sendButton{
-   margin: 1rem .25rem
- }
- </style>
- 
+<style scoped>
+button {
+ margin: 1rem .5rem;
+}
+</style>
