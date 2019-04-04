@@ -71,7 +71,7 @@
       </div>
     </section>
      <button class="button is-primary sendButton" @click="sendUpdate"> <span class="mdi mdi-check"></span>&nbsp; Submit</button>
-  <button class="button is-danger " @click="goHome"> <span class="mdi mdi-cancel"></span>&nbsp; Cancel</button>
+  <button class="button is-danger " @click=" goActuallyHome"> <span class="mdi mdi-cancel"></span>&nbsp; Cancel</button>
  
   </div>
  
@@ -83,7 +83,7 @@ import firebase from "../Firebase";
 import router from "../router";
 
 export default {
-  name: "editDatabase",
+  name: "editSubmission",
   data() {
     return {
       key: this.$route.params.id,
