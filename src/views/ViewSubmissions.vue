@@ -12,9 +12,9 @@
         <b-table-column field="notes" label="Genre">{{ props.row.genre }}</b-table-column>
         <b-table-column field="reviewers" label="Reviewers">
           <ul class="reviewers-list">
-             <li class="reviewers-initials">BC</li> 
-            <li class="reviewers-initials">AK</li>
-            <li class="reviewers-initials">MD</li>
+             <li class="reviewers-initials" :class="{getLit: props.row.Brad} "  @click="ratingsModal = true">BC</li> 
+            <li class="reviewers-initials" :class="{getLit: props.row.Ashley}">AK</li>
+            <li class="reviewers-initials" :class="{getLit: props.row.Michael}">MD</li>
           </ul>
         </b-table-column>
         <!-- <b-table-column field="url" label="URL">
@@ -47,7 +47,36 @@
         </ul>
       </template>
     </b-table>
+        <b-modal :active.sync="ratingsModal" :width="640" scroll="keep"> <div class="card">
+                <div class="card-image">
+                    <figure class="image is-4by3">
+                        <img src="/static/img/placeholder-1280x960.png" alt="Image">
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-48x48">
+                                <img src="/static/img/placeholder-1280x960.png" alt="Image">
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <p class="title is-4">John Smith</p>
+                            <p class="subtitle is-6">@johnsmith</p>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+                        <a>#css</a> <a>#responsive</a>
+                        <br>
+                        <small>11:09 PM - 1 Jan 2016</small>
+                    </div>
+                </div>
+            </div></b-modal>
   </section>
+
 </template>
 
 <script>
@@ -60,6 +89,7 @@ export default {
       data: [],
       subData: [],
       ref: firebase.firestore().collection("issue_Two"),
+      ratingsModal: false
     };
   },
   created() {
@@ -77,8 +107,13 @@ export default {
           author_letter: doc.data().author_letter,
           genre: doc.data().genre,
           primary_genre: doc.data().primary_genre,
-          ratings: doc.data().ratings
+          ratings: doc.data().ratings,
+          Michael: doc.data().Michael,
+          Ashley: doc.data().Ashley,
+          Brad: doc.data().Brad
         });
+    //TODO: now i need to process subData.ratings and flatten it for the table to be able to read it bc it can't work with nested shit
+ 
       });
     });
   },

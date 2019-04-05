@@ -99,7 +99,7 @@ export default {
     sendRating(evt) {
       evt.preventDefault();
       // TODO: need to create an upper level "ratings" and then below that byName etc
-      this.submission["ratings"][this.radioButton] = this.rating;
+      this.submission[this.radioButton] = this.rating;
       // this.submission["ratings"][this.radioButton] = this.rating;
       const updateRef = firebase
         .firestore()
