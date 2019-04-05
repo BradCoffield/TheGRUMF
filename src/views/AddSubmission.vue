@@ -120,7 +120,8 @@ export default {
         title: "",
         author_letter: "",
         genre: "",
-        primary_genre: ""
+        primary_genre: "",
+        ratings: {}
       }
     };
   },
