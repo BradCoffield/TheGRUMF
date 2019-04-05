@@ -6,7 +6,12 @@
     <p>
       <a :href="submission.file " target="_blank">{{submission.title}}</a>, by {{submission.author}}
     </p>
-    <p>Notes: {{submission.notes}}</p>
+    
+    <p>Author Letter: {{submission.author_letter}}</p>
+    <p>Genre: {{submission.genre}}</p>
+    <p>Author's Primary Genre: {{submission.primary_genre}}</p>
+    <p>General Notes: {{submission.notes}}</p>
+
     <br>
   
     <section>
@@ -83,6 +88,7 @@ export default {
     let theSubmission = ref.get().then(doc => {
       if (doc.exists) {
         this.submission = doc.data();
+        console.log(doc.data());
       } else {
         alert("No such document!");
       }
@@ -92,6 +98,7 @@ export default {
   methods: {
     sendRating(evt) {
       evt.preventDefault();
+      // TODO: need to create an upper level "ratings" and then below that byName etc
       this.submission[`ratingBy${this.radioButton}`] = this.rating;
       const updateRef = firebase
         .firestore()

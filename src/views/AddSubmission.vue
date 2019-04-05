@@ -33,6 +33,20 @@
               <input class="input" type="text" v-model="submission.title">
             </div>
           </div>
+        
+              <div class="field">
+                <label  class="label">Genre of Submission</label>
+                  <div class="control">
+              <input class="input" type="text" v-model="submission.genre">
+            </div>
+              </div>
+              <div class="field">
+                <label  class="label">Author's Primary Genre</label>
+                  <div class="control">
+              <input class="input" type="text" v-model="submission.primary_genre">
+            </div>
+              </div>
+          
       <div class="columns">
         <div class="column">
           <div class="field">
@@ -63,6 +77,12 @@
         </div>
       </div>
 
+      <div class="field">
+        <label class="label">Author Letter</label>
+        <div class="control">
+          <textarea class="textarea" placeholder="Optional" v-model="submission.author_letter"></textarea>
+        </div>
+      </div>
       <div class="field">
         <label class="label">Notes for consideration</label>
         <div class="control">
@@ -97,7 +117,10 @@ export default {
         file: "",
         issue: "",
         notes: "",
-        title: ""
+        title: "",
+        author_letter: "",
+        genre: "",
+        primary_genre: ""
       }
     };
   },
