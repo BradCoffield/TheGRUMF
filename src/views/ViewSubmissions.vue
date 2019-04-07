@@ -2,6 +2,24 @@
 <template>
   <section>
     <h2 >View Submissions</h2>
+   
+ <b-field label="Which Issue">
+            <b-select placeholder="" v-model="whichIssueWanted">
+               
+                   <option value="One">One</option>
+                    <option value="Two">Two</option>
+                    <option value="Three">Three</option>
+                    <option value="Four">Four</option>
+                    <option value="Five">Five</option>
+                    <option value="Six">Six</option>
+                    <option value="Seven">Seven</option>
+                    <option value="Eight">Eight</option>
+                    <option value="Nine">Nine</option>
+             
+               
+            </b-select>
+        </b-field>
+ 
     <hr>
     <b-table :data="subData" :striped="true" :mobile-cards="true" detailed paginated per-page="30">
       <template slot-scope="props">
@@ -35,7 +53,7 @@
             <a :href="props.row.url">Link to the piece</a>
           </li>
           <li>General Notes: {{ props.row.notes }}</li>
-
+<li>For Issue: {{props.row.issue}}</li>
           <li>Author Email: {{props.row.email}}</li>
           <li>Submission's Genre: {{props.row.genre}}</li>
           <li>Author's Primary Genre: {{props.row.primary_genre}}</li>
@@ -43,6 +61,9 @@
 
           <button class="button is-outlined" @click="editSubmission(props.row.key)">
             <span class="mdi mdi-square-edit-outline"></span>Edit Submission Details
+          </button>
+          <button class="button is-outlined" @click="finalDecision(props.row.key, props.row.issue)">
+            <span class="mdi mdi-square-edit-outline"></span>Make Final Decision
           </button>
         </ul>
       </template>
@@ -89,7 +110,8 @@ export default {
       data: [],
       subData: [],
       ref: firebase.firestore().collection("issue_Two"),
-      ratingsModal: false
+      ratingsModal: false,
+      whichIssueWanted: ""
     };
   },
   created() {
@@ -104,6 +126,7 @@ export default {
           title: doc.data().title,
           email: doc.data().email,
           notes: doc.data().notes,
+          issue: doc.data().issue,
           author_letter: doc.data().author_letter,
           genre: doc.data().genre,
           primary_genre: doc.data().primary_genre,
@@ -121,10 +144,19 @@ export default {
     editSubmission(id) {
       router.push({
         name: "editSubmission",
-        params: { id: id }
+        params: { id: id },
+
       });
     },
-    rateSubmission(id) {
+    finalDecision(id, issue) {
+      console.log(issue, id)
+      router.push({
+        name: "finalDecision",
+        params: { id: id },
+        query: {issue: issue}
+      });
+    },
+    rateSubmission(id, issue) {
       router.push({
         name: "rateSubmission",
         params: { id: id }

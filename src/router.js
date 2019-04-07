@@ -33,6 +33,11 @@ export default new Router({
       name: 'rateSubmission',
       component: () => import(/* webpackChunkName: "rateSub" */ './views/RateSubmission.vue')
     },
+    {
+      path: '/final-decision/:id',
+      name: 'finalDecision',
+      component: () => import(/* webpackChunkName: "rateSub" */ './views/FinalDecision.vue')
+    },
   
   ]
 })
