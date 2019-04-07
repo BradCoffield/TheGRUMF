@@ -82,7 +82,7 @@ export default {
   created() {
     const ref = firebase
       .firestore()
-      .collection("issue_Two")
+      .collection(`issue_${this.$route.query.issue}`)
       .doc(this.$route.params.id);
 
     let theSubmission = ref.get().then(doc => {

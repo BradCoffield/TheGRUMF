@@ -15,5 +15,20 @@ export default {
  key: this.$route.params.id,
 
 
-    }}}
+    }},
+     created() {
+    const ref = firebase
+      .firestore()
+      .collection(`issue_${this.$route.query.issue}`)
+      .doc(this.$route.params.id);
+
+    let theSubmission = ref.get().then(doc => {
+      if (doc.exists) {
+        this.submission = doc.data();
+        console.log(doc.data());
+      } else {
+        alert("No such document!");
+      }
+    });
+  },}
     </script>

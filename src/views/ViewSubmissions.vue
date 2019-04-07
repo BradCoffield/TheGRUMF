@@ -43,7 +43,7 @@
 
         <!-- <b-table-column field="email" label="Email">{{ props.row.email }}</b-table-column> -->
         <b-table-column field="editButton" label=" ">
-          <button class="button is-light" @click.stop="rateSubmission(props.row.key)">Rate</button>
+          <button class="button is-light" @click.stop="rateSubmission(props.row.key, whichIssueWanted)">Rate</button>
           <!-- <button @click="alerrrt(props.row.key)">Edit</button> -->
         </b-table-column>
       </template>
@@ -168,7 +168,8 @@ export default {
     rateSubmission(id, issue) {
       router.push({
         name: "rateSubmission",
-        params: { id: id }
+        params: { id: id },
+        query: {issue: issue}
       });
     }
   }
