@@ -107,15 +107,26 @@ import router from "../router";
 export default {
   data() {
     return {
+   whichIssueWanted:"Three",
       data: [],
       subData: [],
-      ref: firebase.firestore().collection("issue_Two"),
+      // ref: firebase.firestore().collection(this.theIssue),
       ratingsModal: false,
-      whichIssueWanted: ""
+   
+     
     };
   },
+  watch:{
+    whichIssueWanted: function(){
+      this.getTheSubmissions()
+    }
+  },
   created() {
-    this.ref.onSnapshot(querySnapshot => {
+       this.getTheSubmissions()
+  },
+  methods: {
+    getTheSubmissions(){
+     firebase.firestore().collection(`issue_${this.whichIssueWanted}`).onSnapshot(querySnapshot => {
       this.subData = [];
       querySnapshot.forEach(doc => {
         console.log(doc.data());
@@ -135,12 +146,10 @@ export default {
           Ashley: doc.data().Ashley,
           Brad: doc.data().Brad
         });
-    //TODO: now i need to process subData.ratings and flatten it for the table to be able to read it bc it can't work with nested shit
- 
+  
       });
     });
-  },
-  methods: {
+    },
     editSubmission(id) {
       router.push({
         name: "editSubmission",
