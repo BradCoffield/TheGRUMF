@@ -38,6 +38,11 @@ export default new Router({
       name: 'finalDecision',
       component: () => import(/* webpackChunkName: "rateSub" */ './views/FinalDecision.vue')
     },
+    {
+      path: '/stock-responses/',
+      name: 'stockResponses',
+      component: () => import(/* webpackChunkName: "rateSub" */ './views/StockResponses.vue')
+    },
   
   ]
 })

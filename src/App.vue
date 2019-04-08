@@ -23,6 +23,9 @@
             <div class="navbar-item">
              <router-link to="/view-submissions">View Submissions</router-link>
             </div>
+            <div class="navbar-item">
+             <router-link to="/stock-responses">Stock Responses</router-link>
+            </div>
             <!-- <div class="navbar-item">
               <a class="">Logout</a>
             </div> -->

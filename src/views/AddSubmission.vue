@@ -61,8 +61,8 @@
             <label class="label">For Issue</label>
             <div class="select">
               <select v-model="submission.issue">
-                <option></option>
-                <option>Two</option>
+              
+                
                 <option>Three</option>
                 <option>Four</option>
                 <option>Five</option>
@@ -115,7 +115,7 @@ export default {
         author: "",
         email: "",
         file: "",
-        issue: "",
+        issue: "Three",
         notes: "",
         title: "",
         author_letter: "",
