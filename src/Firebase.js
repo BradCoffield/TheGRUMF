@@ -5,12 +5,12 @@
  const settings = {timestampsInSnapshots: true};
  
  const config = {
-     apiKey: process.env.VUE_APP_FIRESTORE_API_KEY,
-     authDomain: process.env.VUE_APP_FIRESTORE_AUTH_DOMAIN,
-     databaseURL: process.env.VUE_APP_FIRESTORE_DATABASE_URL,
-     projectId: process.env.VUE_APP_FIRESTORE_PROJECT_ID,
-     storageBucket: process.env.VUE_APP_FIRESTORE_STORAGE_BUCKET,
-     messagingSenderId: process.env.VUE_APP_FIRESTORE_MESSAGING_SENDER_ID
+     apiKey: "AIzaSyDqhYAQirUuT3eKXTyCAQybcZWcAwJUxJU",
+     authDomain: "thegrumf.firebaseapp.com",
+     databaseURL: "https://thegrumf.firebaseio.com",
+     projectId: "thegrumf",
+     storageBucket: "thegrumf.appspot.com",
+     messagingSenderId: 546436778427
  };
   
  firebase.initializeApp(config);
