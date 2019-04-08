@@ -1,6 +1,10 @@
 <template>
   <div>
+<<<<<<< HEAD
   
+=======
+    TODO: still need to actually submit the results of the page
+>>>>>>> master
     <h2>
       Judgement is upon you:
       <span class="italics">{{submission.title}}</span>
