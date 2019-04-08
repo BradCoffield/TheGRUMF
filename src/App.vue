@@ -101,11 +101,12 @@ export default {
     },
     logOut() {
       firebase.auth().signOut();
+      router.push('/')
     }
   },
   created(){
       var uiConfig = {
-      signInSuccessUrl: "/view-submissions",
+      signInSuccessUrl: "/",
       signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID]
     };
      // Initialize the FirebaseUI Widget using Firebase.
