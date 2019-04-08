@@ -6,8 +6,7 @@
  <b-field label="Which Issue">
             <b-select placeholder="" v-model="whichIssueWanted">
                
-                   <option value="One">One</option>
-                    <option value="Two">Two</option>
+       
                     <option value="Three">Three</option>
                     <option value="Four">Four</option>
                     <option value="Five">Five</option>

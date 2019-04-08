@@ -1,12 +1,8 @@
 <template>
   <div>
-<<<<<<< HEAD
   
-=======
-    TODO: still need to actually submit the results of the page
->>>>>>> master
     <h2>
-      Judgement is upon you:
+      Judgement time for:
       <span class="italics">{{submission.title}}</span>
     </h2>
     <h3>Accept</h3>

@@ -29,7 +29,9 @@
         </div>
       </div>
       </div>
+       <div id="firebaseui-auth-container"></div>      <div id="sign-in-status"></div>    <a href @click="logOut">Log out</a>
     </nav>
+    
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/add-submission">Add Submission</router-link> |
@@ -78,8 +80,11 @@ h3 {font-size:1.5rem!important}
 </style>
 
 <script>
+import firebase from "./Firebase";
+import router from "./router";
+import * as firebaseui from "firebaseui";
 export default {
-  name: 'Navbar',
+  name: 'baseApp',
   data () {
     return {
       msg: '',
@@ -90,7 +95,72 @@ export default {
     makeBurger () {
       this.activator = !this.activator
       return this.activator
+    },
+    logOut() {
+      firebase.auth().signOut();
     }
+  },
+  created(){
+      var uiConfig = {
+      signInSuccessUrl: "/databases-list",
+      signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID]
+    };
+     // Initialize the FirebaseUI Widget using Firebase.
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // The start method will wait until the DOM is loaded.
+    ui.start("#firebaseui-auth-container", uiConfig);
+
+    let initApp = (function() {
+      firebase.auth().onAuthStateChanged(
+        function(user) {
+          if (user) {
+           
+            // User is signed in.
+            var displayName = user.displayName;
+            var email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var uid = user.uid;
+            var phoneNumber = user.phoneNumber;
+            var providerData = user.providerData;
+      
+            console.log(email)
+            user.getIdToken().then(function(accessToken) {
+               
+              document.getElementById("sign-in-status").textContent =
+                `Signed in as ${email}`;
+              // document.getElementById("sign-in").textContent = "Sign out";
+              // document.getElementById(
+              //   "account-details"
+              // ).textContent = JSON.stringify(
+              //   {
+              //     displayName: displayName,
+              //     email: email,
+              //     emailVerified: emailVerified,
+              //     phoneNumber: phoneNumber,
+              //     photoURL: photoURL,
+              //     uid: uid,
+              //     accessToken: accessToken,
+              //     providerData: providerData
+              //   },
+              //   null,
+              //   "  "
+              // );
+            });
+          } else {
+        
+            // User is signed out.
+            document.getElementById("sign-in-status").textContent =
+              "Signed out";
+            document.getElementById("sign-in").textContent = "Sign in";
+            document.getElementById("account-details").textContent = "null";
+          }
+        },
+        function(error) {
+          console.log(error);
+        }
+      );
+    })();
   }
 }
 </script>
