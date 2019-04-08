@@ -102,7 +102,7 @@ export default {
   },
   created(){
       var uiConfig = {
-      signInSuccessUrl: "/databases-list",
+      signInSuccessUrl: "/view-submissions",
       signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID]
     };
      // Initialize the FirebaseUI Widget using Firebase.
