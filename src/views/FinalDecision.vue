@@ -1,7 +1,7 @@
 <template>
 
     <div>TODO: still need to actually submit the results of the page
-        Hi {{this.$route.query.issue}} {{this.$route.params.id}}
+       <h2>Judgement is upon you: <span class="italics">{{submission.title}}</span></h2>
         <h3>Accept</h3>
         <div class="field">
             <b-switch v-model="isAccepted"
@@ -86,3 +86,10 @@ else{const updateRef = firebase
     },
   }}
     </script>
+
+    <style>
+    .italics{
+      font-style: italic;
+    }
+    </style>
+    
