@@ -59,7 +59,7 @@
           <li>Author's Primary Genre: {{props.row.primary_genre}}</li>
           <li>Author Letter/Bio: {{props.row.author_letter}}</li>
 
-          <button class="button is-outlined" @click="editSubmission(props.row.key)">
+          <button class="button is-outlined" @click="editSubmission(props.row.key, props.row.issue)">
             <span class="mdi mdi-square-edit-outline"></span>Edit Submission Details
           </button>
           <button class="button is-outlined" @click="finalDecision(props.row.key, props.row.issue)">
@@ -150,10 +150,11 @@ export default {
       });
     });
     },
-    editSubmission(id) {
+    editSubmission(id, issue) {
       router.push({
         name: "editSubmission",
         params: { id: id },
+        query: {issue: issue}
 
       });
     },
