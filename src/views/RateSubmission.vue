@@ -22,14 +22,14 @@
           <b-radio-button v-model="radioButton" native-value="Ashley" type="is-info">
             <span>Ashley</span>
           </b-radio-button>
-  
+    <b-radio-button v-model="radioButton" native-value="Michael" type="is-info">
+            <span>Michael</span>
+          </b-radio-button>
           <b-radio-button v-model="radioButton" native-value="Brad" type="is-info">
             <span>Brad</span>
           </b-radio-button>
   
-          <b-radio-button v-model="radioButton" native-value="Michael" type="is-info">
-            <span>Michael</span>
-          </b-radio-button>
+        
         </div>
       </b-field>
       <!-- <p class="content">
@@ -57,10 +57,11 @@
       </div>
     </div>
     </section>
-  
+
    
   
-    <button class="button" @click="sendRating">Submit</button>
+  <button class="button is-primary sendButton" @click="sendRating"> <span class="mdi mdi-check"></span>&nbsp; Submit</button>
+    <button class="button is-danger " @click=" goActuallyHome"> <span class="mdi mdi-cancel"></span>&nbsp; Cancel</button>
   </div>
 
 </template>
@@ -106,6 +107,7 @@ export default {
         .collection(`issue_${this.submission.issue}`)
         .doc(this.$route.params.id)
         .set(this.submission, { merge: true });
+        router.push("/view-submissions")
     },
     goHome() {
       router.push("/view-submissions");
@@ -116,7 +118,10 @@ export default {
       this.submission[`ratingBy${this.radioButton}`] = this.rating;
       console.log(this.submission);
       return newName;
-    }
+    },
+     goActuallyHome() {
+      router.push("/");
+    },
   }
 };
 </script>
