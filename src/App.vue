@@ -168,3 +168,6 @@ export default {
   }
 }
 </script>
+<style>
+.b-table .table th .th-wrap {text-transform: uppercase;}
+</style>

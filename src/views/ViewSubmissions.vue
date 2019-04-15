@@ -47,16 +47,16 @@
         </b-table-column>
       </template>
       <template slot="detail" slot-scope="props">
-        <ul>
+        <ul class="overviewPieceDetails">
           <li>
-            <a :href="props.row.url">Link to the piece</a>
+            <a :href="props.row.url" target="_blank">* link to the piece *</a>
           </li>
-          <li>General Notes: {{ props.row.notes }}</li>
-<li>For Issue: {{props.row.issue}}</li>
-          <li>Author Email: {{props.row.email}}</li>
-          <li>Submission's Genre: {{props.row.genre}}</li>
-          <li>Author's Primary Genre: {{props.row.primary_genre}}</li>
-          <li>Author Letter/Bio: {{props.row.author_letter}}</li>
+          <li><span class="lil-heading">General Notes:</span> {{ props.row.notes }}</li>
+<li><span class="lil-heading">For Issue:</span> {{props.row.issue}}</li>
+          <li><span class="lil-heading">Author Email:</span> {{props.row.email}}</li>
+          <li><span class="lil-heading">Submission's Genre:</span> {{props.row.genre}}</li>
+          <li><span class="lil-heading">Author's Primary Genre:</span> {{props.row.primary_genre}}</li>
+          <li><span class="lil-heading">Author Letter/Bio:</span> {{props.row.author_letter}}</li>
 
           <button class="button is-outlined" @click="editSubmission(props.row.key, props.row.issue)">
             <span class="mdi mdi-square-edit-outline"></span>Edit Submission Details
@@ -192,5 +192,12 @@ button {
 }
 .getLit{
   background-color: antiquewhite;
+}
+
+.overviewPieceDetails li{margin:1rem 0;}
+
+.lil-heading {
+  text-transform: uppercase;
+  font-weight: 800;
 }
 </style>

@@ -19,8 +19,8 @@
     </b-field>
     <h3>Has the person actually been notified?</h3>
     <b-switch v-model="actuallyNotified" true-value="Yes" false-value="No">{{ actuallyNotified }}</b-switch>
-    <p>
-      <button class="button is-primary sendButton" @click="sendDecision">
+    <p class="buttons">
+      <button class="button is-primary " @click="sendDecision">
         <span class="mdi mdi-check"></span>&nbsp; Submit
       </button>
       <button class="button is-danger" @click=" goActuallyHome">
@@ -92,6 +92,9 @@ export default {
     <style>
 .italics {
   font-style: italic;
+}
+.buttons {
+  margin: 3rem 0rem 0px 0rem;
 }
 </style>
     
