@@ -1,7 +1,7 @@
 <template>
   
   <div id="addSubmission">
-    <h1>Add details here regarding a potentially bullocks submisison.</h1> <hr>
+    <h1>Add Submission</h1> <hr>
 
     <section id="addSubmissionForm">
       <div class="columns">
