@@ -15,14 +15,10 @@
       </b-select>
     </b-field>
 
-    <hr>
+    <hr />
     <b-table :data="subData" :striped="true" :mobile-cards="true" detailed paginated per-page="30">
       <template slot-scope="props">
-        <b-table-column
-          field="author"
-          label="Author"
-          
-        >{{props.row.name}}</b-table-column>
+        <b-table-column field="author" label="Author">{{props.row.name}}</b-table-column>
 
         <b-table-column field="title" label="Title">{{ props.row.title }}</b-table-column>
         <b-table-column field="notes" label="Genre">{{ props.row.genre }}</b-table-column>
@@ -88,7 +84,10 @@
                 <span class="lil-heading">Final Decision:</span>
                 {{props.row.finalDecision}}
               </li>
-<li><span class="lil-heading">Decision Notes:</span>{{props.row.decisionNotes}}</li>
+              <li>
+                <span class="lil-heading">Decision Notes:</span>
+                {{props.row.decisionNotes}}
+              </li>
               <li>
                 <span class="lil-heading">Actually Notified?:</span>
                 {{props.row.decisionNotification}}
@@ -112,14 +111,14 @@
       <div class="card">
         <div class="card-image">
           <figure class="image is-4by3">
-            <img src="/static/img/placeholder-1280x960.png" alt="Image">
+            <img src="/static/img/placeholder-1280x960.png" alt="Image" />
           </figure>
         </div>
         <div class="card-content">
           <div class="media">
             <div class="media-left">
               <figure class="image is-48x48">
-                <img src="/static/img/placeholder-1280x960.png" alt="Image">
+                <img src="/static/img/placeholder-1280x960.png" alt="Image" />
               </figure>
             </div>
             <div class="media-content">
@@ -134,7 +133,7 @@
             <a>@bulmaio</a>.
             <a>#css</a>
             <a>#responsive</a>
-            <br>
+            <br />
             <small>11:09 PM - 1 Jan 2016</small>
           </div>
         </div>
@@ -152,77 +151,80 @@ export default {
     return {
       pieceRejected: false,
       pieceAccepted: false,
-      nullClass:"",
-      isRejected:"isRejected",
-      whichIssueWanted:"Three",
+      nullClass: "",
+      isRejected: "isRejected",
+      whichIssueWanted: "Three",
       data: [],
       subData: [],
       // ref: firebase.firestore().collection(this.theIssue),
-      ratingsModal: false,
-   
-     
+      ratingsModal: false
     };
   },
-  watch:{
-    whichIssueWanted: function(){
-      this.getTheSubmissions()
+  watch: {
+    whichIssueWanted: function() {
+      this.getTheSubmissions();
     }
   },
   created() {
-       this.getTheSubmissions()
+    this.getTheSubmissions();
   },
   methods: {
-    getTheSubmissions(){
-     firebase.firestore().collection(`issue_${this.whichIssueWanted}`).onSnapshot(querySnapshot => {
-      this.subData = [];
-      querySnapshot.forEach(doc => {
-        console.log(doc.data());
-        this.subData.push({
-          key: doc.id,
-          name: doc.data().author,
-          url: doc.data().file,
-          title: doc.data().title,
-          email: doc.data().email,
-          notes: doc.data().notes,
-          issue: doc.data().issue,
-          author_letter: doc.data().author_letter,
-          genre: doc.data().genre,
-          primary_genre: doc.data().primary_genre,
-          ratings: doc.data().ratings,
-          Michael: doc.data().Michael,
-          Ashley: doc.data().Ashley,
-          Brad: doc.data().Brad,
-          finalDecision: doc.data().decision,
-          decisionNotification: doc.data().actuallyNotified,
-          decisionNotes: doc.data().decisionNotes
+    getTheSubmissions() {
+      firebase
+        .firestore()
+        .collection(`issue_${this.whichIssueWanted}`)
+        .onSnapshot(querySnapshot => {
+          this.subData = [];
+          querySnapshot.forEach(doc => {
+            console.log(doc.data());
+            this.subData.push({
+              key: doc.id,
+              name: doc.data().author,
+              url: doc.data().file,
+              title: doc.data().title,
+              email: doc.data().email,
+              notes: doc.data().notes,
+              issue: doc.data().issue,
+              author_letter: doc.data().author_letter,
+              genre: doc.data().genre,
+              primary_genre: doc.data().primary_genre,
+              ratings: doc.data().ratings,
+              Michael: doc.data().Michael,
+              Ashley: doc.data().Ashley,
+              Brad: doc.data().Brad,
+              finalDecision: doc.data().decision,
+              decisionNotification: doc.data().actuallyNotified,
+              decisionNotes: doc.data().decisionNotes
+            });
+            if (doc.data().decision == "Rejected") {
+              this.pieceRejected = true;
+            }
+            if (doc.data().decision == "Accepted") {
+              this.pieceAccepted = true;
+            }
+          });
         });
-        if (doc.data().decision == 'Rejected') {this.pieceRejected = true;}
-        if (doc.data().decision == 'Accepted') {this.pieceAccepted = true;}
-  
-      });
-    });
     },
     editSubmission(id, issue) {
       router.push({
         name: "editSubmission",
         params: { id: id },
-        query: {issue: issue}
-
+        query: { issue: issue }
       });
     },
     finalDecision(id, issue) {
-      console.log(issue, id)
+      console.log(issue, id);
       router.push({
         name: "finalDecision",
         params: { id: id },
-        query: {issue: issue}
+        query: { issue: issue }
       });
     },
     rateSubmission(id, issue) {
       router.push({
         name: "rateSubmission",
         params: { id: id },
-        query: {issue: issue}
+        query: { issue: issue }
       });
     }
   }
@@ -259,5 +261,4 @@ button {
   background: red;
   /* color: red; */
 }
-
 </style>

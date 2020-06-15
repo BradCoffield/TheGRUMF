@@ -1,7 +1,7 @@
 <template>
-  
   <div id="addSubmission">
-    <h1>Add Submission</h1> <hr>
+    <h1>Add Submission</h1>
+    <hr />
 
     <section id="addSubmissionForm">
       <div class="columns">
@@ -9,7 +9,7 @@
           <div class="field">
             <label class="label">Author</label>
             <div class="control">
-              <input class="input" type="text" placeholder v-model="submission.author">
+              <input class="input" type="text" placeholder v-model="submission.author" />
             </div>
           </div>
         </div>
@@ -17,42 +17,37 @@
           <div class="field">
             <label class="label">Author Email</label>
             <div class="control">
-              <input
-                class="input"
-                type="email"
-                placeholder=""
-                v-model="submission.email"
-              >
+              <input class="input" type="email" placeholder v-model="submission.email" />
             </div>
           </div>
         </div>
       </div>
-         <div class="field">
-            <label class="label">Title of Submission</label>
-            <div class="control">
-              <input class="input" type="text" v-model="submission.title">
-            </div>
-          </div>
-        
-              <div class="field">
-                <label  class="label">Genre of Submission</label>
-                  <div class="control">
-              <input class="input" type="text" v-model="submission.genre">
-            </div>
-              </div>
-              <div class="field">
-                <label  class="label">Author's Primary Genre</label>
-                  <div class="control">
-              <input class="input" type="text" v-model="submission.primary_genre">
-            </div>
-              </div>
-          
+      <div class="field">
+        <label class="label">Title of Submission</label>
+        <div class="control">
+          <input class="input" type="text" v-model="submission.title" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Genre of Submission</label>
+        <div class="control">
+          <input class="input" type="text" v-model="submission.genre" />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Author's Primary Genre</label>
+        <div class="control">
+          <input class="input" type="text" v-model="submission.primary_genre" />
+        </div>
+      </div>
+
       <div class="columns">
         <div class="column">
           <div class="field">
             <label class="label">Link to file in Google Drive</label>
             <div class="control">
-              <input class="input" type="text" v-model="submission.file">
+              <input class="input" type="text" v-model="submission.file" />
             </div>
           </div>
         </div>
@@ -61,8 +56,6 @@
             <label class="label">For Issue</label>
             <div class="select">
               <select v-model="submission.issue">
-              
-                
                 <option>Three</option>
                 <option>Four</option>
                 <option>Five</option>
@@ -90,18 +83,21 @@
         </div>
       </div>
     </section>
-    <button class="button is-primary sendButton" @click="sendSub"><span class="mdi mdi-check"></span>&nbsp; Submit</button>
-  <button class="button is-light sendButton " @click="goActuallyHome"><span class="mdi mdi-cancel"></span>&nbsp; Cancel</button>
+    <button class="button is-primary sendButton" @click="sendSub">
+      <span class="mdi mdi-check"></span>&nbsp; Submit
+    </button>
+    <button class="button is-light sendButton" @click="goActuallyHome">
+      <span class="mdi mdi-cancel"></span>&nbsp; Cancel
+    </button>
   </div>
-  
+
   <!-- <div id="show-inputs">
     {{submission.author}}
     {{submission.email}}
     {{submission.file}}
     {{submission.issue}}
     {{submission.notes}}
-  </div> -->
-
+  </div>-->
 </template>
 
 <script>
@@ -140,16 +136,16 @@ export default {
         });
       // updateRef();
     },
-     goActuallyHome() {
+    goActuallyHome() {
       router.push("/");
-    },
+    }
   }
 };
 </script>
  
  <style>
- .sendButton{
-   margin: 1rem .25rem
- }
- </style>
+.sendButton {
+  margin: 1rem 0.25rem;
+}
+</style>
  

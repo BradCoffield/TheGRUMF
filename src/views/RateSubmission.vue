@@ -1,35 +1,33 @@
 <template>
   <div>
-    
     <h2>Rate this muhfucka!</h2>
-    <hr>
+    <hr />
     <p>
-      <a :href="submission.file " target="_blank">{{submission.title}}</a>, by {{submission.author}}
+      <a :href="submission.file " target="_blank">{{submission.title}}</a>
+      , by {{submission.author}}
     </p>
-    
+
     <p>Author Letter: {{submission.author_letter}}</p>
     <p>Genre: {{submission.genre}}</p>
     <p>Author's Primary Genre: {{submission.primary_genre}}</p>
     <p>General Notes: {{submission.notes}}</p>
 
-    <br>
-  
+    <br />
+
     <section>
       <b-field style="display:block">
         <label for="radioButton" class="label">Who are you?</label>
-  
+
         <div class="flexme">
           <b-radio-button v-model="radioButton" native-value="Ashley" type="is-info">
             <span>Ashley</span>
           </b-radio-button>
-    <b-radio-button v-model="radioButton" native-value="Michael" type="is-info">
+          <b-radio-button v-model="radioButton" native-value="Michael" type="is-info">
             <span>Michael</span>
           </b-radio-button>
           <b-radio-button v-model="radioButton" native-value="Brad" type="is-info">
             <span>Brad</span>
           </b-radio-button>
-  
-        
         </div>
       </b-field>
       <!-- <p class="content">
@@ -45,25 +43,26 @@
             min="0"
             max="10"
             v-model="rating.numRating"
-          >
+          />
         </div>
         <p>0 = "I'll cut you bitches if we publish this."</p>
         <p>10 = "I'll cut you bitches if we don't publish this."</p>
       </div>
-       <div class="field">
-      <label class="label">Comments / Reasons for your rating</label>
-      <div class="control">
-        <textarea class="textarea" name id cols="70" rows="10" v-model="rating.notesRating"></textarea>
+      <div class="field">
+        <label class="label">Comments / Reasons for your rating</label>
+        <div class="control">
+          <textarea class="textarea" name id cols="70" rows="10" v-model="rating.notesRating"></textarea>
+        </div>
       </div>
-    </div>
     </section>
 
-   
-  
-  <button class="button is-primary sendButton" @click="sendRating"> <span class="mdi mdi-check"></span>&nbsp; Submit</button>
-    <button class="button is-danger " @click=" goActuallyHome"> <span class="mdi mdi-cancel"></span>&nbsp; Cancel</button>
+    <button class="button is-primary sendButton" @click="sendRating">
+      <span class="mdi mdi-check"></span>&nbsp; Submit
+    </button>
+    <button class="button is-danger" @click=" goActuallyHome">
+      <span class="mdi mdi-cancel"></span>&nbsp; Cancel
+    </button>
   </div>
-
 </template>
 
 
@@ -107,7 +106,7 @@ export default {
         .collection(`issue_${this.submission.issue}`)
         .doc(this.$route.params.id)
         .set(this.submission, { merge: true });
-        router.push("/view-submissions")
+      router.push("/view-submissions");
     },
     goHome() {
       router.push("/view-submissions");
@@ -119,9 +118,9 @@ export default {
       console.log(this.submission);
       return newName;
     },
-     goActuallyHome() {
+    goActuallyHome() {
       router.push("/");
-    },
+    }
   }
 };
 </script>

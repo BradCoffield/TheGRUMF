@@ -1,173 +1,167 @@
 <template>
   <div id="app">
-     <nav class="navbar" id="nav">
-        <div class="container">
-        <div class="navbar-brand is-large">
-          <a class="navbar-item" href="/">
-          <img src="../src/assets/mascot-1.png" alt="" style="margin-right:5px;">   TheGRUMF 
-          </a>
-          <button @click="makeBurger" class="button navbar-burger" data-target="navMenu" v-bind:class="{ 'is-active': activator }">
-              <span></span>
-              <span></span>
-              <span></span>
-        </button>
-        </div>
-        <div class="navbar-menu" id="navMenu" v-bind:class="{ 'is-active': activator }">
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <router-link to="/">Home</router-link> 
-            </div>
-            <div class="navbar-item ">
-              <router-link to="/add-submission">Add Submission</router-link> 
-            </div>
-            <div class="navbar-item">
-             <router-link to="/view-submissions">View Submissions</router-link>
-            </div>
-            <div class="navbar-item">
-             <router-link to="/stock-responses">Stock Responses</router-link>
-            </div>
-            <!-- <div class="navbar-item">
-              <a class="">Logout</a>
-            </div> -->
-        </div>
-      </div>
-      </div>
-       <div id="firebaseui-auth-container"></div>      <div id="sign-in-status"></div>    <a href @click="logOut">Log out</a>
-    </nav>
-    
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/add-submission">Add Submission</router-link> |
-      <router-link to="/view-submissions">View Submissions</router-link>
-    </div> -->
-    <div class="container">
-      <router-view/>
-    </div>
+    <link
+      rel="stylesheet"
+      href="https://cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css"
+    />
+    <b-navbar>
+      <template slot="brand">
+        <b-navbar-item tag="router-link" :to="{ path: '/' }">
+          <span id="library-logo-text" style="font-weight:bold"
+            >Library Cheatsheets Manager</span
+          >
+        </b-navbar-item>
+      </template>
+      <template slot="start">
+        <b-navbar-dropdown label="Cheatsheets">
+          <b-navbar-item>
+            <router-link to="/data-list">Cheatsheet List</router-link>
+          </b-navbar-item>
+
+          <b-navbar-item>
+            <router-link to="/add-cheatsheet">Add Cheatsheet</router-link>
+          </b-navbar-item>
+        </b-navbar-dropdown>
+        <b-navbar-dropdown label="Cached Searches">
+          <b-navbar-item>
+            <router-link to="/cached-searches-list-ebsco">
+              EBSCO Cached Searches List</router-link
+            >
+          </b-navbar-item>
+          <b-navbar-item>
+            <router-link to="/cached-searches-list-primo-books">
+              Primo Books Cached Searches List</router-link
+            >
+          </b-navbar-item>
+          <b-navbar-item>
+            <router-link to="/cached-searches-list-primo-articles">
+              Primo Articles Cached Searches List</router-link
+            >
+          </b-navbar-item>
+          <b-navbar-item>
+            <router-link to="add-cached-search"> Add Cached Search</router-link>
+          </b-navbar-item>
+        </b-navbar-dropdown>
+        <b-navbar-dropdown label="Weblinks">
+          <b-navbar-item>
+            <router-link to="add-weblink"> Add Weblink</router-link>
+          </b-navbar-item>
+          <b-navbar-item>
+            <router-link to="manage-weblinks">Manage Weblinks</router-link>
+          </b-navbar-item>
+        </b-navbar-dropdown>
+      </template>
+
+      <template slot="end">
+        <b-navbar-item class="no-hover">
+          <router-link to="/login" v-if="!authenticated"
+            ><b-button type="is-primary">
+              Login
+            </b-button></router-link
+          >
+          <router-link to="/logout" v-else
+            ><b-button type="is-primary" outlined>Logout</b-button></router-link
+          >
+        </b-navbar-item>
+      </template>
+    </b-navbar>
+
+    <router-view :key="$route.fullPath" />
   </div>
 </template>
 
-<style lang="scss">
- @import "~bulma/sass/utilities/_all";
- 
-
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  // text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  text-align: center;
-  background-color: $primary;
-  margin-bottom: 1.5rem;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #333;
-      background: lightgray;
-      padding: 5px;
-      border-radius: 3px;
-    }
-  }
-}
-.container {
-  padding: 0 1rem;
-}
-h1,h2,h3,h4,h5,h6 {font-weight:bold!important}
-h1 {font-size: 2rem!important}
-h2 {font-size:1.8rem!important}
-h3 {font-size:1.5rem!important}
-</style>
-
 <script>
-import firebase from "./Firebase";
-import router from "./router";
-import * as firebaseui from "firebaseui";
+// import firebase from "firebase";
+// import * as firebaseui from "firebaseui";
 export default {
-  name: 'baseApp',
-  data () {
-    return {
-      msg: '',
-      activator: false
-    }
+  data() {
+    return {};
   },
-  methods: {
-    makeBurger () {
-      this.activator = !this.activator
-      return this.activator
-    },
-    logOut() {
-      firebase.auth().signOut();
-      router.push('/')
-    }
+  methods: {},
+  created() {
+    // console.log(secondary);
+    // const ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // var uiConfig = {
+    //   callbacks: {
+    //     signInSuccessWithAuthResult: function() {
+    //       // User successfully signed in.
+    //       // Return type determines whether we continue the redirect automatically
+    //       // or whether we leave that to developer to handle.
+    //       return true;
+    //     },
+    //     uiShown: function() {
+    //       // The widget is rendered.
+    //       // Hide the loader.
+    //       // document.getElementById("loader").style.display = "none";
+    //     }
+    //   },
+    //   // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+    //   signInFlow: "popup",
+    //   signInSuccessUrl: "/",
+    //   signInOptions: [
+    //     // Leave the lines as is for the providers you want to offer your users.
+    //     firebase.auth.GoogleAuthProvider.PROVIDER_ID
+    //   ]
+    // };
+    // // The start method will wait until the DOM is loaded.
+    // ui.start("#firebaseui-auth-container", uiConfig);
   },
-  created(){
-      var uiConfig = {
-      signInSuccessUrl: "/",
-      signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID]
-    };
-     // Initialize the FirebaseUI Widget using Firebase.
-    var ui = new firebaseui.auth.AuthUI(firebase.auth());
-    // The start method will wait until the DOM is loaded.
-    ui.start("#firebaseui-auth-container", uiConfig);
-
-    let initApp = (function() {
-      firebase.auth().onAuthStateChanged(
-        function(user) {
-          if (user) {
-           
-            // User is signed in.
-            var displayName = user.displayName;
-            var email = user.email;
-            var emailVerified = user.emailVerified;
-            var photoURL = user.photoURL;
-            var uid = user.uid;
-            var phoneNumber = user.phoneNumber;
-            var providerData = user.providerData;
-      
-            console.log(email)
-            user.getIdToken().then(function(accessToken) {
-               
-              document.getElementById("sign-in-status").textContent =
-                `Signed in as ${email}`;
-              // document.getElementById("sign-in").textContent = "Sign out";
-              // document.getElementById(
-              //   "account-details"
-              // ).textContent = JSON.stringify(
-              //   {
-              //     displayName: displayName,
-              //     email: email,
-              //     emailVerified: emailVerified,
-              //     phoneNumber: phoneNumber,
-              //     photoURL: photoURL,
-              //     uid: uid,
-              //     accessToken: accessToken,
-              //     providerData: providerData
-              //   },
-              //   null,
-              //   "  "
-              // );
-            });
-          } else {
-        
-            // User is signed out.
-            document.getElementById("sign-in-status").textContent =
-              "Signed out";
-            document.getElementById("sign-in").textContent = "Sign in";
-            document.getElementById("account-details").textContent = "null";
-          }
-        },
-        function(error) {
-          console.log(error);
-        }
-      );
-    })();
+  computed: {
+    authenticated() {
+      return JSON.parse(localStorage.getItem("authenticated"));
+    }
   }
-}
+};
 </script>
-<style>
-.b-table .table th .th-wrap {text-transform: uppercase;}
+
+<style lang="scss">
+// #app {
+//   font-family: "Avenir", Helvetica, Arial, sans-serif;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+//   text-align: center;
+//   color: #2c3e50;
+// }
+
+// #nav {
+//   padding: 30px;
+
+//   a {
+//     font-weight: bold;
+//     color: #2c3e50;
+
+//     &.router-link-exact-active {
+//       color: #42b983;
+//     }
+//   }
+// }
+// @import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
+// @import url("https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap");
+// h1,
+// h2,
+// h3,
+// h4 {
+//   font-family: "Raleway", sans-serif;
+// }
+// p,
+// span,
+// tbody,
+// .th-wrap,
+// a,
+// .button,
+// .label {
+//   font-family: "Raleway", sans-serif;
+// }
+.container {
+  margin-top: 3rem !important;
+}
+.table-wrapper {
+  margin-top: 3rem !important;
+}
+.navbar {
+  background: #d2d2d4 !important;
+}
+.no-hover:hover {
+  background-color: #d2d2d4 !important;
+}
 </style>

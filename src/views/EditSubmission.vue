@@ -1,15 +1,14 @@
 <template>
-  
   <div id="addSubmission">
     <h1>Edit this. You have your reasons, I'm sure.</h1>
 
     <section id="addSubmissionForm">
-  <div class="columns">
+      <div class="columns">
         <div class="column">
           <div class="field">
             <label class="label">Author</label>
             <div class="control">
-              <input class="input" type="text" placeholder v-model="submission.author">
+              <input class="input" type="text" placeholder v-model="submission.author" />
             </div>
           </div>
         </div>
@@ -17,42 +16,37 @@
           <div class="field">
             <label class="label">Author Email</label>
             <div class="control">
-              <input
-                class="input"
-                type="email"
-                placeholder=""
-                v-model="submission.email"
-              >
+              <input class="input" type="email" placeholder v-model="submission.email" />
             </div>
           </div>
         </div>
       </div>
-         <div class="field">
-            <label class="label">Title of Submission</label>
-            <div class="control">
-              <input class="input" type="text" v-model="submission.title">
-            </div>
-          </div>
-        
-              <div class="field">
-                <label  class="label">Genre of Submission</label>
-                  <div class="control">
-              <input class="input" type="text" v-model="submission.genre">
-            </div>
-              </div>
-              <div class="field">
-                <label  class="label">Author's Primary Genre</label>
-                  <div class="control">
-              <input class="input" type="text" v-model="submission.primary_genre">
-            </div>
-              </div>
-          
+      <div class="field">
+        <label class="label">Title of Submission</label>
+        <div class="control">
+          <input class="input" type="text" v-model="submission.title" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Genre of Submission</label>
+        <div class="control">
+          <input class="input" type="text" v-model="submission.genre" />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Author's Primary Genre</label>
+        <div class="control">
+          <input class="input" type="text" v-model="submission.primary_genre" />
+        </div>
+      </div>
+
       <div class="columns">
         <div class="column">
           <div class="field">
             <label class="label">Link to file in Google Drive</label>
             <div class="control">
-              <input class="input" type="text" v-model="submission.file">
+              <input class="input" type="text" v-model="submission.file" />
             </div>
           </div>
         </div>
@@ -89,7 +83,7 @@
           <textarea class="textarea" placeholder="Optional" v-model="submission.notes"></textarea>
         </div>
       </div>
-  
+
       <!-- <div class="columns">
         <div class="column">
           <div class="field">
@@ -154,14 +148,15 @@
         <div class="control">
           <textarea class="textarea" placeholder="Optional" v-model="submission.notes"></textarea>
         </div>
-      </div> -->
+      </div>-->
     </section>
-     <button class="button is-primary sendButton" @click="sendUpdate"> <span class="mdi mdi-check"></span>&nbsp; Submit</button>
-  <button class="button is-danger " @click=" goActuallyHome"> <span class="mdi mdi-cancel"></span>&nbsp; Cancel</button>
- 
+    <button class="button is-primary sendButton" @click="sendUpdate">
+      <span class="mdi mdi-check"></span>&nbsp; Submit
+    </button>
+    <button class="button is-danger" @click=" goActuallyHome">
+      <span class="mdi mdi-cancel"></span>&nbsp; Cancel
+    </button>
   </div>
- 
-
 </template>
 
 <script>
@@ -173,21 +168,17 @@ export default {
   data() {
     return {
       key: this.$route.params.id,
-      submission: {},
-       
+      submission: {}
     };
   },
   created() {
     const ref = firebase
       .firestore()
-      .collection(`issue_${this.$route.query.issue}`) 
+      .collection(`issue_${this.$route.query.issue}`)
       .doc(this.$route.params.id);
-
-    
 
     let theSubmission = ref.get().then(doc => {
       if (doc.exists) {
-     
         this.submission = doc.data();
         console.log(this.submission);
         console.log(this.$route.params.id);
@@ -195,33 +186,26 @@ export default {
         alert("No such document!");
       }
     });
-
-    
-
   },
 
   methods: {
     sendUpdate(evt) {
- 
       evt.preventDefault();
       const updateRef = firebase
         .firestore()
-       .collection(`issue_${this.submission.issue}`)
+        .collection(`issue_${this.submission.issue}`)
         .doc(this.$route.params.id)
         .set(this.submission, { merge: true });
       // updateRef();
     },
     goActuallyHome() {
       router.push("/");
-    },
-   
-    
-  },
-  
+    }
+  }
 };
 </script>
 <style scoped>
 button {
- margin: 1rem .5rem;
+  margin: 1rem 0.5rem;
 }
 </style>

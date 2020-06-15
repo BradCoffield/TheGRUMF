@@ -1,6 +1,5 @@
 <template>
   <div>
-  
     <h2>
       Judgement time for:
       <span class="italics">{{submission.title}}</span>
@@ -20,7 +19,7 @@
     <h3>Has the person actually been notified?</h3>
     <b-switch v-model="actuallyNotified" true-value="Yes" false-value="No">{{ actuallyNotified }}</b-switch>
     <p class="buttons">
-      <button class="button is-primary " @click="sendDecision">
+      <button class="button is-primary" @click="sendDecision">
         <span class="mdi mdi-check"></span>&nbsp; Submit
       </button>
       <button class="button is-danger" @click=" goActuallyHome">
@@ -64,23 +63,21 @@ export default {
   methods: {
     sendDecision(evt) {
       evt.preventDefault();
- 
-        if (this.isAccepted === "Yes") {
-          this.submission.decision = "Accepted";
-          
-        }
-        if (this.isRejected === "Yes") {
-          this.submission.decision = "Rejected";
-        }
+
+      if (this.isAccepted === "Yes") {
+        this.submission.decision = "Accepted";
+      }
+      if (this.isRejected === "Yes") {
+        this.submission.decision = "Rejected";
+      }
       this.submission.actuallyNotified = this.actuallyNotified;
       this.submission.decisionNotes = this.decisionNotes;
 
-        const updateRef = firebase
-          .firestore()
-          .collection(`issue_${this.submission.issue}`)
-          .doc(this.$route.params.id)
-          .set(this.submission, { merge: true });
-     
+      const updateRef = firebase
+        .firestore()
+        .collection(`issue_${this.submission.issue}`)
+        .doc(this.$route.params.id)
+        .set(this.submission, { merge: true });
     },
     goActuallyHome() {
       router.push("/");
