@@ -11,7 +11,7 @@
     "buefy": "^0.7.10",
     "firebase": "^5.7.1",
     "firebaseui": "^3.5.2",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1"
   },
